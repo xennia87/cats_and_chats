@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Muli';
+    src: url('Muli.ttf') format('truetype');
+}
+
+body {
+    font-family:'Muli', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+/* Header */
+
+.header_container {
+    background-color: lightgrey;
+    height: 200px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    position: relative;
+    top: 20px;
+}
+
+.tabs_menu {
+    width: 100%;
+}
+
+.tabs_list {
+    display: flex;
+    flex-direction: row;
+}
+
+li.tab_link {
+    list-style: none;
+    margin-right: 10px;
+}
+
+.tab_link {
+    /* padding-bottom: 10px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1.3rem;
+}
+
+.tab_link[aria-selected="true"] {
+    border-bottom: 4px solid black;
+    margin-bottom: -10px;
+}
+
+/* Main */
+
+.main_container {
+    background-color: rgb(144, 176, 194);
+    margin-top: 200px;
+    width: 100%;
+}
+
+/* Hero */
+
+.hero {
+    width: 100%;
+    height: 300px;
+    background-color: black;
+    background-image: url(/images/hero.png);
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color negro con 50% de transparencia */
+}
+
+.hero_content {
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+/* Footer */
+
+.footer_container {
+    background-color: lightcoral;
+}
