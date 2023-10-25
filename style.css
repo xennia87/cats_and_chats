@@ -69,6 +69,7 @@ li.tab_link {
     background-color: var(--lighest-beige);
     margin-top: 200px;
     width: 100%;
+    min-height: 80vh; /* Cambia "1vh" a "80vh" u otro valor adecuado */
 }
 
 /* Hero */
@@ -102,20 +103,40 @@ li.tab_link {
     z-index: 1;
 }
 
+/* Cart */
+
+.cards_cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 30px 50px;
+}
+
+.cart {
+    min-width: 25%;
+    height: 450px;
+    border: 1px solid var(--darkest-brown);
+    border-radius: 8px;
+    background-color: white;
+    padding: 20px;
+}
+
 /* Cards */
 
 .cards_container {
-    padding: 30px 50px;
+    /* padding: 30px 50px; */
     display: grid;
+    grid-gap: 25px;
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
+    max-width: 75%;
 }
 
 .card {
     border: 1px solid darkgrey;
     border-radius: 8px;
-    width: 250px;
+    width: 100%;
     height: 400px;
     background-color: white;
     overflow: hidden;
@@ -124,7 +145,6 @@ li.tab_link {
 
 .card_image {
     height: 50%; /* Establecer el alto al 60% */
-    position: relative;
 }
 
 .card_image img {
@@ -177,12 +197,25 @@ button {
 
 button:hover {
     background-color: var(--light-beige);
-    color: white;
 }
-
 
 /* Footer */
 
 .footer_container {
     background-color: var(--light-beige);
+    height: 80px;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.footer_social > .bi {
+    margin-right: 10px;
+    font-size: 30px;
+    color: var(--darkest-brown);
 }
