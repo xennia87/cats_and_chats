@@ -1,6 +1,15 @@
 @font-face {
     font-family: 'Muli';
-    src: url('Muli.ttf') format('truetype');
+    src: url('/fonts/Muli.ttf') format('truetype');
+}
+
+:root {
+    --darkest-brown: #664229;
+    --dark-brown: #987554;
+    --light-beige: #E5D3B3;
+    --lighest-beige: #f9f4f0;
+    --medium-beige: #D2B48C;
+    --dark-beige: #B99976;
 }
 
 body {
@@ -10,7 +19,7 @@ body {
 /* Header */
 
 .header_container {
-    background-color: lightgrey;
+    background-color: var(--lighest-beige);
     height: 200px;
     width: 100%;
     position: fixed;
@@ -57,7 +66,7 @@ li.tab_link {
 /* Main */
 
 .main_container {
-    background-color: rgb(144, 176, 194);
+    background-color: var(--lighest-beige);
     margin-top: 200px;
     width: 100%;
 }
@@ -93,8 +102,87 @@ li.tab_link {
     z-index: 1;
 }
 
+/* Cards */
+
+.cards_container {
+    padding: 30px 50px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+    border: 1px solid darkgrey;
+    border-radius: 8px;
+    width: 250px;
+    height: 400px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card_image {
+    height: 50%; /* Establecer el alto al 60% */
+    position: relative;
+}
+
+.card_image img {
+    width: 100%; /* La imagen ocupará todo el ancho del contenedor de la imagen */
+    height: 100%; /* La imagen ocupará todo el alto del contenedor de la imagen */
+    object-fit: cover; /* La imagen se ajustará al tamaño del contenedor manteniendo la relación de aspecto */
+}
+
+.card_text {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding: 15px;
+    background-color: white;
+    height: 40%;
+    align-content: center;
+    justify-content: center;
+}
+
+.card_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 80px;
+}
+
+.card_price {
+    font-size: 1.5rem;
+    justify-self: end;
+}
+
+.card_description {
+    grid-column: span 2;
+    height: 40px;
+}
+
+.card_submit {
+    grid-column: span 2;
+    margin-top: 10px;
+}
+
+
+button {
+    border: 0px;
+    background-color: var(--dark-beige);
+    color: white;
+    font-weight: bold;
+    padding: 8px 0px;
+    border-radius: 6px;
+    height: 40px;
+}
+
+button:hover {
+    background-color: var(--light-beige);
+    color: white;
+}
+
+
 /* Footer */
 
 .footer_container {
-    background-color: lightcoral;
+    background-color: var(--light-beige);
 }
