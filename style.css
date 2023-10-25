@@ -124,7 +124,6 @@ li.tab_link {
 /* Cards */
 
 .cards_container {
-    /* padding: 30px 50px; */
     display: grid;
     grid-gap: 25px;
     justify-items: center;
