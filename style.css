@@ -185,8 +185,7 @@ li.tab_link {
     min-width: 20%;
     max-width: 50%;
     height: auto;
-    padding: 20px;
-    margin: 20px;
+    margin: 25px;
     flex: 20%;
 }
 
@@ -244,13 +243,12 @@ li.tab_link {
 .cards_container {
     display: grid;
     grid-gap: 25px;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(200px, 300px)); /* Ancho mínimo de 200px y ajuste automático */
     grid-auto-flow: dense;
-    max-width: 75%;
     flex: 70%;
-    padding-right: 25px;
+    padding: 25px;
 }
 
 .card {
