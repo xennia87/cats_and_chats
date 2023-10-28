@@ -59,7 +59,7 @@ li.tab_link {
 }
 
 .tab_link[aria-selected="true"] {
-    border-bottom: 4px solid black;
+    border-bottom: 4px solid var(--darkest-brown);;
     margin-bottom: -10px;
 }
 
@@ -69,7 +69,6 @@ li.tab_link {
     background-color: var(--lighest-beige);
     margin-top: 200px;
     width: 100%;
-    min-height: 80vh; /* Cambia "1vh" a "80vh" u otro valor adecuado */
 }
 
 /* Hero */
@@ -94,7 +93,7 @@ li.tab_link {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Color negro con 50% de transparencia */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hero_content {
@@ -107,19 +106,49 @@ li.tab_link {
 
 .cards_cart {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
-    padding: 30px 50px;
+    padding: 30px 0px;
 }
 
 .cart {
-    min-width: 25%;
+    min-width: 20%;
+    max-width: 50%;
     height: 450px;
     border: 1px solid var(--darkest-brown);
     border-radius: 8px;
     background-color: white;
     padding: 20px;
+    flex: 20%;
+    height: auto;
+    margin: 20px;
 }
+
+/* Cart & Cards Header */
+
+.products-header {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .content {
+    flex: 20%;
+    background-color: #f9f4f0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .separator {
+    flex: 40%;
+    border-bottom: 3px solid var(--darkest-brown);
+  }
+  
 
 /* Cards */
 
@@ -128,14 +157,18 @@ li.tab_link {
     grid-gap: 25px;
     justify-items: center;
     align-items: center;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px)); /* Ancho mínimo de 200px y ajuste automático */
+    grid-auto-flow: dense;
     max-width: 75%;
+    flex: 70%;
+    padding-right: 25px;
 }
 
 .card {
     border: 1px solid darkgrey;
     border-radius: 8px;
     width: 100%;
+    min-width: 200px;
     height: 400px;
     background-color: white;
     overflow: hidden;
