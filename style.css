@@ -207,13 +207,13 @@ li.tab_link {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.card_product_list {
+.cart_product_list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.card_product_item {
+.cart_product_item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

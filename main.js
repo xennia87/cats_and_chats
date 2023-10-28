@@ -2,8 +2,8 @@
 
 //// ACTIVIDAD
 
-// - Captura de eventos
-// - Salida en el HTML
+// ✅ Captura de eventos
+// ✅ Salida en el HTML
 // - Almacenar datos en el storage
 // - Recuperar datos del storage
 // - No se puede usar alert() para salida
@@ -111,4 +111,55 @@ document.getElementById('login').addEventListener("click", () => {
     const password = document.getElementById("password").value;
 
     verificarCredenciales(username, password);
+});
+
+// Agregar al carrito
+
+const botonAgregar = document.querySelectorAll('.card_submit')
+const cartContainer = document.getElementById('cart_product_list')
+
+function agregarCarrito(nombre, descripcion, precio) {
+
+    const nuevoItem = document.createElement('li')
+    nuevoItem.classList.add('cart_product_item');
+
+    const nuevoItemChild1 = document.createElement('div')
+    const nuevoItemChild1b = document.createElement('h6')
+    const nuevoItemChild1c = document.createElement('small')
+    const nuevoItemChild2 = document.createElement('span')
+    const nuevoItemChild3 = document.createElement('button')
+
+    nuevoItemChild1b.classList.add('cart_product_name')
+    nuevoItemChild1c.classList.add('cart_product_description')
+    nuevoItemChild2.classList.add('cart_product_price')
+    nuevoItemChild3.classList.add('quitar_item')
+
+    nuevoItemChild1b.textContent = nombre;
+    nuevoItemChild1c.textContent = descripcion;
+    nuevoItemChild2.textContent = precio;
+    nuevoItemChild3.textContent = 'Quitar';
+
+    nuevoItemChild1.appendChild(nuevoItemChild1b);
+    nuevoItemChild1.appendChild(nuevoItemChild1c)
+
+    nuevoItem.appendChild(nuevoItemChild1);
+    nuevoItem.appendChild(nuevoItemChild2);
+    nuevoItem.appendChild(nuevoItemChild3);
+
+    cartContainer.appendChild(nuevoItem)
+}
+
+botonAgregar.forEach(boton => {
+    boton.addEventListener('click', function() {
+        const card = boton.closest('.card');
+        const nombreProducto = card.querySelector('.card_title').textContent;
+        const descripcionProducto = card.querySelector('.card_description').textContent;
+        const precioProducto = card.querySelector('.card_price').textContent;
+
+        console.log("Nombre del producto: " + nombreProducto);
+        console.log("Descripción del producto: " + descripcionProducto);
+        console.log("Precio del producto: " + precioProducto);
+
+        agregarCarrito(nombreProducto, descripcionProducto, precioProducto)
+    });
 });
