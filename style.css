@@ -25,7 +25,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,6 +61,10 @@ li.tab_link {
 .tab_link[aria-selected="true"] {
     border-bottom: 4px solid var(--darkest-brown);;
     margin-bottom: -10px;
+}
+
+#crear_articulo {
+    display: none;
 }
 
 .login_button {
@@ -116,6 +120,32 @@ li.tab_link {
     z-index: 1;
 }
 
+#headerMessageContainer {
+    border-radius: 8px;
+    background-color: white;
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 30%;
+    margin-left: 35%;
+}
+
+#headerMessage {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--dark-brown);
+}
+
+#closeMessage {
+    display: block;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+}
 
 /* Cart & Cards Header */
 
@@ -309,4 +339,32 @@ button:hover {
     margin-right: 10px;
     font-size: 30px;
     color: var(--darkest-brown);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: var(--lighest-beige);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 40px;
 }
