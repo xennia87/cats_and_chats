@@ -63,6 +63,20 @@ li.tab_link {
     margin-bottom: -10px;
 }
 
+.login_button {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+.login_btn {
+    padding: 10px 20px;
+    background-color: var(--darkest-brown);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
 /* Main */
 
 .main_container {
