@@ -102,6 +102,31 @@ li.tab_link {
     z-index: 1;
 }
 
+
+/* Cart & Cards Header */
+
+.products-header {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.content {
+    flex: 20%;
+    background-color: #f9f4f0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.separator {
+    flex: 40%;
+    border-bottom: 3px solid var(--darkest-brown);
+}
+
 /* Cart */
 
 .cards_cart {
@@ -115,40 +140,60 @@ li.tab_link {
 .cart {
     min-width: 20%;
     max-width: 50%;
-    height: 450px;
-    border: 1px solid var(--darkest-brown);
-    border-radius: 8px;
-    background-color: white;
-    padding: 20px;
-    flex: 20%;
     height: auto;
+    padding: 20px;
     margin: 20px;
+    flex: 20%;
 }
 
-/* Cart & Cards Header */
+.cart_header {
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 5px;
+}
 
-.products-header {
+.cart_product_list_container {
+    border: 1px solid var(--dark-beige);
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card_product_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.card_product_item {
     display: flex;
     flex-direction: row;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .content {
-    flex: 20%;
-    background-color: #f9f4f0;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.cart_product_name {
+    line-height: 0.5;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.card_total_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.card_product_total_sum {
     font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  .separator {
-    flex: 40%;
-    border-bottom: 3px solid var(--darkest-brown);
-  }
-  
+}
 
 /* Cards */
 
