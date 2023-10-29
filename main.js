@@ -62,9 +62,8 @@ function mostrarMensajeBienvenida(username) {
 
 const usuarios = '[ { "username": "admin", "password": "admin" }, { "username": "enduser", "password": "enduser" } ]'
 
-const usuariosObj = JSON.parse(usuarios)
-console.log(usuariosObj)
-
+const usuariosObj = JSON.parse(usuarios);
+console.log(usuariosObj);
 
 // Obtenemos los elementos del DOM
 const loginButton = document.getElementById("loginButton");
@@ -73,19 +72,19 @@ const close = document.getElementById("close");
 
 // Mostramos el modal cuando se hace clic en el botón "Login"
 loginButton.addEventListener("click", () => {
-    modal.style.display = "block";
+  modal.style.display = "block";
 });
 
 // Ocultamos el modal cuando se hace clic en la "X" de cerrar
 close.addEventListener("click", () => {
-    modal.style.display = "none";
+  modal.style.display = "none";
 });
 
 // Ocultamos el modal cuando se hace clic fuera de él
 window.addEventListener("click", (event) => {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 });
 
 
@@ -115,8 +114,9 @@ document.getElementById('login').addEventListener("click", () => {
 
 /// CONTENEDOR ARTICULOS
 
-// Crear objetos para cada item en el stock
-// Con una función meter esos elementos en el DOM
+
+
+// Esta clase crea un objeto con el nuevo elemento a añadir como producto al DOM
 
 const cardsContainer = document.getElementById('cards_container')
 
@@ -171,8 +171,16 @@ class nuevoItem {
     }
 }
 
+// Agregamos nuevos items
+
 let pastel = new nuevoItem("Pastel Rico", "El pastel más delicioso", 7.50, "images/cake.jpeg")
 pastel.agregarItem()
+
+let sandwich = new nuevoItem("Neko sandwich", "Un sandwich de atun y sardinas", 8, "images/sandwich.jpeg")
+sandwich.agregarItem()
+
+const sandwichString = JSON.stringify(sandwich)
+console.log(sandwichString)
 
 /// CARRITO
 

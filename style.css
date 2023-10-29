@@ -217,14 +217,18 @@ li.tab_link {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
 }
 
 .cart_product_name {
     line-height: 1;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+small {
+    font-size: 0.7em;
 }
 
 .card_total_item {
@@ -245,18 +249,19 @@ li.tab_link {
     grid-gap: 25px;
     justify-content: center;
     align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 300px)); /* Ancho mínimo de 200px y ajuste automático */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px)); /* Ancho mínimo de 200px y ajuste automático */
     grid-auto-flow: dense;
-    flex: 70%;
+    flex: 60%;
     padding: 25px;
 }
 
 .card {
     border: 1px solid darkgrey;
     border-radius: 8px;
-    width: 100%;
-    min-width: 200px;
-    height: 400px;
+    /* width: 100%;
+    min-width: 200px; */
+    height: 300px;
+    width: 200px;
     background-color: white;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -283,24 +288,25 @@ li.tab_link {
 }
 
 .card_title {
-    font-size: 1.5rem;
+    font-size: 1em;
     font-weight: bold;
-    height: 80px;
+    height: 30%;
 }
 
 .card_price {
-    font-size: 1.5rem;
+    font-size: 1.2em;
     justify-self: end;
 }
 
 .card_description {
     grid-column: span 2;
-    height: 40px;
+    height: 30%;
+    font-size: 0.8em;
 }
 
 .card_submit {
     grid-column: span 2;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 
@@ -311,7 +317,7 @@ button {
     font-weight: bold;
     padding: 8px 0px;
     border-radius: 6px;
-    height: 40px;
+    height: 30px;
 }
 
 button:hover {
