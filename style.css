@@ -238,8 +238,16 @@ small {
     align-items: baseline;
 }
 
-.card_product_total_sum {
-    font-size: 2rem;
+.cart_product_price::before {
+    content: "$";
+}
+
+.cart_product_total_sum {
+    font-size: 1.8rem;
+}
+
+.cart_product_total_sum::before {
+    content: "$";
 }
 
 /* Cards */
@@ -296,6 +304,10 @@ small {
 .card_price {
     font-size: 1.2em;
     justify-self: end;
+}
+
+.card_price::before {
+    content: "$"
 }
 
 .card_description {

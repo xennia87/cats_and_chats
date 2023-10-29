@@ -145,7 +145,7 @@ class nuevoItem {
 
             const nuevoItemPrice = document.createElement('div')
             nuevoItemPrice.classList.add('card_price')
-            nuevoItemPrice.textContent = `$${this.precio}`
+            nuevoItemPrice.textContent = this.precio
 
             const nuevoItemDescription = document.createElement('div')
             nuevoItemDescription.classList.add('card_description')
@@ -189,6 +189,7 @@ console.log(sandwichString)
 const botonAgregar = document.querySelectorAll('.card_submit')
 const cartContainer = document.getElementById('cart_product_list')
 
+
 function agregarCarrito(nombre, descripcion, precio) {
 
     const nuevoItem = document.createElement('li')
@@ -218,6 +219,10 @@ function agregarCarrito(nombre, descripcion, precio) {
     nuevoItem.appendChild(nuevoItemChild3);
 
     cartContainer.appendChild(nuevoItem)
+
+    // Recalculamos el total
+    const total = calcularTotal()
+    totalCarrito.textContent = total.toFixed(2)
 }
 
 // Acción para escuchar el botón de "Añadir al carrito"
@@ -229,10 +234,6 @@ botonAgregar.forEach(boton => {
         const descripcionProducto = card.querySelector('.card_description').textContent;
         const precioProducto = card.querySelector('.card_price').textContent;
 
-        console.log("Nombre del producto: " + nombreProducto);
-        console.log("Descripción del producto: " + descripcionProducto);
-        console.log("Precio del producto: " + precioProducto);
-
         agregarCarrito(nombreProducto, descripcionProducto, precioProducto)
     });
 });
@@ -243,5 +244,26 @@ cartContainer.addEventListener('click', function(event) {
     if (event.target.classList.contains('quitar_item')) {
         const item = event.target.closest('.cart_product_item');
         item.remove();
+        // Recalculamos el total
+        const total = calcularTotal()
+        totalCarrito.textContent = total.toFixed(2)
     }
 });
+
+// Suma el total de todos los elementos que haya en el carrito.
+
+let totalCarrito = document.getElementById('cart_total')
+
+function calcularTotal(){
+    const precioItemsCarrito = document.querySelectorAll('.cart_product_price')
+    let total = 0
+    precioItemsCarrito.forEach(item => {
+        console.log(item)
+        total += parseFloat(item.textContent.replace('$', '').replace(',', ''));
+    });
+
+    return total
+};
+
+const total = calcularTotal()
+totalCarrito.textContent = total.toFixed(2)
