@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
 @font-face {
     font-family: 'Muli';
     src: url('/fonts/Muli.ttf') format('truetype');
@@ -222,7 +224,7 @@ li.tab_link {
 
 .cart_product_name {
     line-height: 1;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -242,12 +244,20 @@ small {
     content: "$";
 }
 
+.cart_product_quantity {
+    font-size: 0.7em;
+}
+
 .cart_product_total_sum {
     font-size: 1.8rem;
 }
 
 .cart_product_total_sum::before {
     content: "$";
+}
+
+.cart_remove_item::before {
+    content: url(images/trash.svg);
 }
 
 /* Cards */

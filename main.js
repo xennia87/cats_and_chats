@@ -63,7 +63,6 @@ function mostrarMensajeBienvenida(username) {
 const usuarios = '[ { "username": "admin", "password": "admin" }, { "username": "enduser", "password": "enduser" } ]'
 
 const usuariosObj = JSON.parse(usuarios);
-console.log(usuariosObj);
 
 // Obtenemos los elementos del DOM
 const loginButton = document.getElementById("loginButton");
@@ -113,8 +112,6 @@ document.getElementById('login').addEventListener("click", () => {
 });
 
 /// CONTENEDOR ARTICULOS
-
-
 
 // Esta clase crea un objeto con el nuevo elemento a añadir como producto al DOM
 
@@ -180,45 +177,56 @@ let sandwich = new nuevoItem("Neko sandwich", "Un sandwich de atun y sardinas", 
 sandwich.agregarItem()
 
 const sandwichString = JSON.stringify(sandwich)
-console.log(sandwichString)
 
 /// CARRITO
 
+function obtenerCarrito() {
+    const carritoJSON = localStorage.getItem('carrito')
+    return JSON.parse(carritoJSON) || []
+}
+
+function guardarCarrito(carrito) {
+    const carritoJSON = JSON.stringify(carrito)
+    localStorage.setItem('carrito', carritoJSON)
+    console.log('Guardar carrito' + carritoJSON)
+}
+
+let carrito = obtenerCarrito()
+
 // Agregar al carrito
 
-const botonAgregar = document.querySelectorAll('.card_submit')
 const cartContainer = document.getElementById('cart_product_list')
 
-
-function agregarCarrito(nombre, descripcion, precio) {
+function agregarCarrito(nombre, precio) {
 
     const nuevoItem = document.createElement('li')
     nuevoItem.classList.add('cart_product_item');
 
-    const nuevoItemChild1 = document.createElement('div')
-    const nuevoItemChild1b = document.createElement('h6')
-    const nuevoItemChild1c = document.createElement('small')
-    const nuevoItemChild2 = document.createElement('span')
-    const nuevoItemChild3 = document.createElement('button')
+    const nuevoItemName = document.createElement('div')
+    const nuevoItemQuantity = document.createElement('div')
+    const nuevoItemPrice = document.createElement('span')
+    const nuevoItemButton = document.createElement('button')
 
-    nuevoItemChild1b.classList.add('cart_product_name')
-    nuevoItemChild1c.classList.add('cart_product_description')
-    nuevoItemChild2.classList.add('cart_product_price')
-    nuevoItemChild3.classList.add('quitar_item')
+    nuevoItemName.classList.add('cart_product_name')
+    nuevoItemQuantity.classList.add('cart_product_quantity')
+    nuevoItemPrice.classList.add('cart_product_price')
+    nuevoItemButton.classList.add('cart_remove_item')
 
-    nuevoItemChild1b.textContent = nombre;
-    nuevoItemChild1c.textContent = descripcion;
-    nuevoItemChild2.textContent = precio;
-    nuevoItemChild3.textContent = 'Quitar';
+    nuevoItemName.textContent = nombre
+    nuevoItemQuantity.textContent = 1
+    nuevoItemPrice.textContent = precio
+    // nuevoItemChild3.textContent = 'Quitar'
 
-    nuevoItemChild1.appendChild(nuevoItemChild1b);
-    nuevoItemChild1.appendChild(nuevoItemChild1c)
-
-    nuevoItem.appendChild(nuevoItemChild1);
-    nuevoItem.appendChild(nuevoItemChild2);
-    nuevoItem.appendChild(nuevoItemChild3);
+    nuevoItem.appendChild(nuevoItemName)
+    nuevoItem.appendChild(nuevoItemQuantity)
+    nuevoItem.appendChild(nuevoItemPrice)
+    nuevoItem.appendChild(nuevoItemButton)
 
     cartContainer.appendChild(nuevoItem)
+
+    // Añadimos al local storage
+    carrito.push({nombre, precio})
+    guardarCarrito(carrito)
 
     // Recalculamos el total
     const total = calcularTotal()
@@ -227,26 +235,35 @@ function agregarCarrito(nombre, descripcion, precio) {
 
 // Acción para escuchar el botón de "Añadir al carrito"
 
+const botonAgregar = document.querySelectorAll('.card_submit')
+
 botonAgregar.forEach(boton => {
     boton.addEventListener('click', function() {
         const card = boton.closest('.card');
         const nombreProducto = card.querySelector('.card_title').textContent;
-        const descripcionProducto = card.querySelector('.card_description').textContent;
         const precioProducto = card.querySelector('.card_price').textContent;
 
-        agregarCarrito(nombreProducto, descripcionProducto, precioProducto)
+        agregarCarrito(nombreProducto, precioProducto)
     });
 });
 
 // Eliminar del carrito
 
 cartContainer.addEventListener('click', function(event) {
-    if (event.target.classList.contains('quitar_item')) {
+    if (event.target.classList.contains('cart_remove_item')) {
         const item = event.target.closest('.cart_product_item');
+        const index = Array.from(cartContainer.children).indexOf(item);
+
         item.remove();
+
         // Recalculamos el total
         const total = calcularTotal()
         totalCarrito.textContent = total.toFixed(2)
+
+        // Eliminamos del local storage
+        carrito.splice(index, 1);
+        console.log(carrito)
+        guardarCarrito(carrito); 
     }
 });
 
@@ -258,7 +275,6 @@ function calcularTotal(){
     const precioItemsCarrito = document.querySelectorAll('.cart_product_price')
     let total = 0
     precioItemsCarrito.forEach(item => {
-        console.log(item)
         total += parseFloat(item.textContent.replace('$', '').replace(',', ''));
     });
 
@@ -267,3 +283,32 @@ function calcularTotal(){
 
 const total = calcularTotal()
 totalCarrito.textContent = total.toFixed(2)
+
+// Cargamos el carrito cuando se carga la página
+
+function cargarCarrito() {
+    while (cartContainer.firstChild) {
+        cartContainer.removeChild(cartContainer.firstChild);
+    }
+
+    const carritoEnLocalStorage = obtenerCarrito();
+    carrito = [];
+
+    carritoEnLocalStorage.forEach(item => {
+        // Comprobar si el producto ya existe en el carrito
+        const existeEnCarrito = carrito.some(cartItem => cartItem.nombre === item.nombre);
+
+        if (!existeEnCarrito) {
+            agregarCarrito(item.nombre, item.precio);
+        }
+    });
+}
+
+let carritoCargado = false;
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (!carritoCargado) {
+        cargarCarrito();
+        carritoCargado = true;
+    }
+});
