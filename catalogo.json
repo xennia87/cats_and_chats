@@ -2,19 +2,19 @@
   {
     "nombre_producto": "Catpuccino",
     "descripcion_producto": "El mejor café del mundo",
-    "precio_producto": "$5",
+    "precio_producto": 5,
     "imagen_producto": "images/coffee.jpeg"
   },
   {
     "nombre_producto": "Neko Sandwich",
     "descripcion_producto": "Sandwich vegetal en forma de gato",
-    "precio_producto": "$6",
+    "precio_producto": 6,
     "imagen_producto": "images/sandwich.jpeg"
   },
   {
     "nombre_producto": "Tarta gatuna",
     "descripcion_producto": "Pastel amasado con amor",
-    "precio_producto": "$5",
+    "precio_producto": 5,
     "imagen_producto": "images/cake.jpeg"
   }
 ]

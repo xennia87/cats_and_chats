@@ -113,6 +113,69 @@ document.getElementById('login').addEventListener("click", () => {
     verificarCredenciales(username, password);
 });
 
+/// CONTENEDOR ARTICULOS
+
+// Crear objetos para cada item en el stock
+// Con una función meter esos elementos en el DOM
+
+const cardsContainer = document.getElementById('cards_container')
+
+class nuevoItem {
+    constructor(nombre, descripcion, precio, imagen) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagen = imagen;
+        // Esta función agrega el item al DOM
+        this.agregarItem = function() {
+            // Creamos todos los elementos y le damos el contenido
+            const nuevoItem = document.createElement('div')
+            nuevoItem.classList.add('card')
+
+            const nuevoItemImagen = document.createElement('div')
+            nuevoItemImagen.classList.add('card_image')
+            const imagenDentroDiv = document.createElement('img')
+            imagenDentroDiv.src = this.imagen
+
+            const nuevoItemText = document.createElement('div')
+            nuevoItemText.classList.add('card_text')
+            const nuevoItemTitle = document.createElement('div')
+            nuevoItemTitle.classList.add('card_title')
+            nuevoItemTitle.textContent = this.nombre
+
+            const nuevoItemPrice = document.createElement('div')
+            nuevoItemPrice.classList.add('card_price')
+            nuevoItemPrice.textContent = `$${this.precio}`
+
+            const nuevoItemDescription = document.createElement('div')
+            nuevoItemDescription.classList.add('card_description')
+            nuevoItemDescription.textContent = this.descripcion
+
+            const nuevoItemButton = document.createElement('button')
+            nuevoItemButton.classList.add('card_submit')
+            nuevoItemButton.id = 'boton_agregar'
+            nuevoItemButton.textContent = 'Añadir al carrito'
+
+            //Añadimos los elementos creados
+            nuevoItemImagen.appendChild(imagenDentroDiv)
+            nuevoItemText.appendChild(nuevoItemTitle)
+            nuevoItemText.appendChild(nuevoItemPrice)
+            nuevoItemText.appendChild(nuevoItemDescription)
+            nuevoItemText.appendChild(nuevoItemButton)
+            
+            nuevoItem.appendChild(nuevoItemImagen)
+            nuevoItem.appendChild(nuevoItemText)
+
+            cardsContainer.appendChild(nuevoItem)
+        }
+    }
+}
+
+let pastel = new nuevoItem("Pastel Rico", "El pastel más delicioso", 7.50, "images/cake.jpeg")
+pastel.agregarItem()
+
+/// CARRITO
+
 // Agregar al carrito
 
 const botonAgregar = document.querySelectorAll('.card_submit')
@@ -149,6 +212,8 @@ function agregarCarrito(nombre, descripcion, precio) {
     cartContainer.appendChild(nuevoItem)
 }
 
+// Acción para escuchar el botón de "Añadir al carrito"
+
 botonAgregar.forEach(boton => {
     boton.addEventListener('click', function() {
         const card = boton.closest('.card');
@@ -162,4 +227,13 @@ botonAgregar.forEach(boton => {
 
         agregarCarrito(nombreProducto, descripcionProducto, precioProducto)
     });
+});
+
+// Eliminar del carrito
+
+cartContainer.addEventListener('click', function(event) {
+    if (event.target.classList.contains('quitar_item')) {
+        const item = event.target.closest('.cart_product_item');
+        item.remove();
+    }
 });
