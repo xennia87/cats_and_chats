@@ -4,8 +4,8 @@
 
 // ✅ Captura de eventos
 // ✅ Salida en el HTML
-// - Almacenar datos en el storage
-// - Recuperar datos del storage
+// ✅ Almacenar datos en el storage
+// ✅ Recuperar datos del storage
 // - No se puede usar alert() para salida
 // - No se puede usar prompt() para entrada
 // - Capturamos eventos usuario inputs sobre botones
@@ -57,8 +57,7 @@ function showWelcomeMessage(username) {
 }
 /// SISTEMA LOGIN
 
-// Cogemos el json de usuarios, lo pasamos a un array
-// y lo convertimos en objeto
+// Convertimos el json de usuarios a un array y a objeto
 
 const users = '[ { "username": "admin", "password": "admin" }, { "username": "enduser", "password": "enduser" } ]'
 
@@ -71,26 +70,27 @@ const close = document.getElementById("close")
 
 // Mostramos el modal cuando se hace clic en el botón "Login"
 loginButton.addEventListener("click", () => {
-  modal.style.display = "block"
+    modal.style.display = "block"
+
 })
 
 // Ocultamos el modal cuando se hace clic en la "X" de cerrar
 close.addEventListener("click", () => {
-  modal.style.display = "none"
+    modal.style.display = "none"
 })
 
 // Ocultamos el modal cuando se hace clic fuera de él
 window.addEventListener("click", (event) => {
-  if (event.target == modal) {
-    modal.style.display = "none"
-  }
+    if (event.target == modal) {
+        modal.style.display = "none"
+    }
 })
 
 // Función para verificar las credenciales
 function verifyCredentials(username, password) {
     const userFound = usersObj.find(user => user.username === username && user.password === password)
-    const createArticleTab = document.getElementById('crear_articulo')
-
+    const createArticleTab = document.getElementById('create_article')
+    
     if (userFound) {
         showWelcomeMessage(userFound.username) // Muestra el mensaje de bienvenida
         createArticleTab.style.display = 'block'
@@ -106,8 +106,57 @@ function verifyCredentials(username, password) {
 document.getElementById('login').addEventListener("click", () => {
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
-
+    
     verifyCredentials(username, password)
+})
+
+// SISTEMA NUEVO PRODUCTO
+
+const addProduct = document.getElementById('create_article')
+const productFormModal = document.getElementById('modal_new_product')
+const closeForm = document.getElementById("closeForm")
+const createProduct = document.getElementById('create_product_button')
+
+
+// Mostramos el modal cuando se hace clic en el botón "Crear producto"
+addProduct.addEventListener("click", () => {
+    productFormModal.style.display = "block"
+    addProduct.setAttribute('aria-selected', true)
+    
+})
+
+// Ocultamos el modal cuando se hace clic en la "X" de cerrar
+closeForm.addEventListener("click", () => {
+    productFormModal.style.display = "none"
+    addProduct.setAttribute('aria-selected', false)
+})
+
+// Ocultamos el modal cuando se hace clic fuera de él
+window.addEventListener("click", (event) => {
+    if (event.target == productFormModal) {
+        productFormModal.style.display = "none"
+        addProduct.setAttribute('aria-selected', false)
+    }
+})
+
+// Ocultamos el modal cuando se envía el form
+createProduct.addEventListener("click", (event) => {
+    productFormModal.style.display = "none"
+    addProduct.setAttribute('aria-selected', false)
+})
+
+// Agregamos un producto cuando se pulsa el botón enviar
+
+document.getElementById('create_product_button').addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value
+    const description = document.getElementById('description').value
+    const price = document.getElementById('price').value
+    const image = document.getElementById('image').value
+
+    const newitem = new cardItem(name, description, price, image)
+    newitem.addItem()
 })
 
 /// CONTENEDOR ARTICULOS
@@ -178,11 +227,11 @@ sandwich.addItem()
 const sandwichString = JSON.stringify(sandwich)
 
 /// CARRITO
-// Agregar al carrito
+// Agrega los productos fisicamente al contenedor del carrito
 
 const cartContainer = document.getElementById('cart_product_list')
 
-function addToCart(name, price) {
+function addToCart(name, price, quantity = 1) {
 
     const newCartItem = document.createElement('li')
     newCartItem.classList.add('cart_product_item')
@@ -198,7 +247,7 @@ function addToCart(name, price) {
     newCartItemButton.classList.add('cart_remove_item')
 
     newCartItemName.textContent = name
-    newCartItemQuantity.textContent = 1
+    newCartItemQuantity.textContent = quantity
     newCartItemPrice.textContent = price
     // newCartItemChild3.textContent = 'Quitar'
 
@@ -212,24 +261,60 @@ function addToCart(name, price) {
     // Recalculamos el total
     const total = calculateTotal()
     cartTotal.textContent = total.toFixed(2)
+
 }
 
 // Acción para escuchar el botón de "Añadir al carrito"
 
 const addButton = document.querySelectorAll('.card_submit')
-const cartItems = document.querySelectorAll('.cart_product_item')
+// const cartItems = document.querySelectorAll('.cart_product_item')
 
-addButton.forEach(boton => {
-    boton.addEventListener('click', function() {
-        const card = boton.closest('.card')
-        const itemName = card.querySelector('.card_title').textContent
-        const itemPrice = card.querySelector('.card_price').textContent
+// addButton.forEach(boton => {
+//     boton.addEventListener('click', function() {
+//         const card = boton.closest('.card')
+//         const itemName = card.querySelector('.card_title').textContent
+//         const itemPrice = card.querySelector('.card_price').textContent
 
-        const cartItems = document.querySelectorAll('.cart_product_item')
+//         const cartItems = document.querySelectorAll('.cart_product_item')
+
+//         const existingCartItem = [...cartItems].find(item => {
+//             const cartItemName = item.querySelector('.cart_product_name').textContent
+//             return (cartItemName == itemName) ? true : false
+//         })
+
+//         // Si existe el elemento en el carrito añadimos +1 a la cantidad e incrementamos el precio
+//         if (existingCartItem) {
+//             const itemQuantity = existingCartItem.querySelector('.cart_product_quantity')
+//             const currentQuantity = parseInt(itemQuantity.textContent, 10)
+//             itemQuantity.textContent = currentQuantity +1
+
+//             const itemTotalPrice = existingCartItem.querySelector('.cart_product_price')
+//             const currenTotalPrice = parseFloat(itemTotalPrice.textContent.replace(',', ''))
+//             const newTotalPrice = (currentQuantity + 1) * itemPrice
+//             itemTotalPrice.textContent = newTotalPrice.toFixed(2)
+
+//         } else {
+//             addToCart(itemName, itemPrice)
+//         }
+//         // Recalculamos el total
+//         const total = calculateTotal()
+//         cartTotal.textContent = total.toFixed(2)
+//     })
+// })
+
+// Acción para escuchar el botón de "Añadir al carrito"
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('card_submit')) {
+        const boton = event.target;
+        const card = boton.closest('.card');
+        const itemName = card.querySelector('.card_title').textContent;
+        const itemPrice = card.querySelector('.card_price').textContent;
+
+        const cartItems = document.querySelectorAll('.cart_product_item');
 
         const existingCartItem = [...cartItems].find(item => {
-            const cartItemName = item.querySelector('.cart_product_name').textContent
-            return (cartItemName == itemName) ? true : false
+            const cartItemName = item.querySelector('.cart_product_name').textContent;
+            return (cartItemName == itemName) ? true : false;
         })
 
         // Si existe el elemento en el carrito añadimos +1 a la cantidad e incrementamos el precio
@@ -246,12 +331,13 @@ addButton.forEach(boton => {
         } else {
             addToCart(itemName, itemPrice)
         }
-
         // Recalculamos el total
         const total = calculateTotal()
         cartTotal.textContent = total.toFixed(2)
-    })
-})
+
+    }
+});
+
 
 // Eliminar del carrito
 
@@ -285,3 +371,56 @@ function calculateTotal(){
 
 const total = calculateTotal()
 cartTotal.textContent = total.toFixed(2)
+
+
+// LOCAL STORAGE
+
+// Creamos una cadena de elementos en el carrito
+function getCartItemsString() {
+    const cartItems = document.querySelectorAll('.cart_product_item');
+    const itemsArray = [];
+
+    cartItems.forEach(item => {
+        const name = item.querySelector('.cart_product_name').textContent;
+        const quantity = item.querySelector('.cart_product_quantity').textContent;
+        const price = item.querySelector('.cart_product_price').textContent;
+        const itemObject = {
+            name: name,
+            quantity: quantity,
+            price: price
+        };
+        itemsArray.push(itemObject);
+    });
+
+    const cartItemsString = JSON.stringify(itemsArray);
+    return cartItemsString;
+}
+  
+// Función para agregar la cadena al local storage
+function saveCartToLocalStorage() {
+    const cartItemsString = getCartItemsString();
+    localStorage.setItem('cartItems', cartItemsString);
+  }
+  
+// Llamamos a la función de guardar el carrito cuando se cierra / recarga la página.
+  window.addEventListener('beforeunload', function() {
+    saveCartToLocalStorage();
+  });
+
+  function loadCartFromLocalStorage() {
+    const cartItemsString = localStorage.getItem('cartItems');
+    console.log(cartItemsString);
+    if (cartItemsString) {
+        const itemsArray = JSON.parse(cartItemsString);
+
+        itemsArray.forEach(itemObject => {
+            const itemName = itemObject.name;
+            const itemQuantity = itemObject.quantity;
+            const itemPrice = itemObject.price;
+
+            addToCart(itemName, itemPrice, parseInt(itemQuantity, 10));
+        });
+    }
+}
+// Llamamos a la función de cargar el carrito una vez por carga.
+loadCartFromLocalStorage();

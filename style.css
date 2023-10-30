@@ -65,8 +65,8 @@ li.tab_link {
     margin-bottom: -10px;
 }
 
-#crear_articulo {
-    display: none;
+#create_article {
+    display: none; 
 }
 
 .login_button {
@@ -81,6 +81,16 @@ li.tab_link {
     color: white;
     border: none;
     border-radius: 5px;
+}
+
+/* New product modal */
+
+#productForm {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    font-size: .8rem;
+    grid-gap: 5px;
 }
 
 /* Main */

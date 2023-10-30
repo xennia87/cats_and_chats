@@ -17,7 +17,7 @@
                 <!-- Falta incluir los links -->
                 <li class="tab_link" aria-selected="true">Cafetería</li>
                 <li class="tab_link" aria-selected="false">Bienestar</li>
-                <li class="tab_link" id="crear_articulo" aria-selected="false">Crear artículo</li>
+                <li class="tab_link" id="create_article" aria-selected="false">Crear artículo</li>
             </ul>
         </div>
         <div class="login_button">
@@ -106,7 +106,7 @@
         </div>
     </footer>
     
-    <!-- Modal -->
+    <!-- Modal login -->
     <div id="modalweb" class="modal">
         <div class="modal-content">
             <span class="close" id="close">&times;</span>
@@ -122,6 +122,25 @@
             </form>
             <p id="errorMessage"></p>
             <p>¿No tienes una cuenta? <a href="#" id="registerLink">Regístrate</a></p>
+        </div>
+    </div>
+
+    <!-- Modal alta producto -->
+    <div id="modal_new_product" class="modal">
+        <div class="modal_new_product_content modal-content">
+            <span class="close" id="closeForm">&times;</span>
+            <h2>Agregar nuevo producto</h2>
+            <form id="productForm">
+                <label for="name">Nombre del producto:</label>
+                <input type="text" id="name" placeholder="Nombre" value="Pastel gatuno">
+                <label for="description">Descripción del producto:</label>
+                <input type="text" id="description" placeholder="Escribe una descripción" value="Un pastel delicioso">
+                <label for="price">Precio:</label>
+                <input type="number" id="price" placeholder="Añade un precio" value="9">
+                <label for="image">Escribe la URL de la imagen:</label>
+                <input type="text" id="image" placeholder="Añade la url de la imagen" value="images/cake.jpeg">
+                <button type="button" id="create_product_button">Enviar</button>
+            </form>
         </div>
     </div>
     
