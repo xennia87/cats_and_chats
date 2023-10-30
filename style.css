@@ -291,7 +291,7 @@ small {
 }
 
 .cart_remove_item::before {
-    content: url(images/trash.svg);
+    content: url(docs/assets/trash.svg);
 }
 
 /* Cards */

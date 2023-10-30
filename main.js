@@ -177,10 +177,10 @@ class cardItem {
 
 // Agregamos nuevos items
 
-let pastel = new cardItem("Pastel Rico", "El pastel más delicioso", 7.50, "images/cake.jpeg")
+let pastel = new cardItem("Pastel Rico", "El pastel más delicioso", 7.50, "docs/assets/cake.jpeg")
 pastel.addItem()
 
-let sandwich = new cardItem("Neko sandwich", "Sandwich de atun y sardinas", 8, "images/sandwich.jpeg")
+let sandwich = new cardItem("Neko sandwich", "Sandwich de atun y sardinas", 8, "docs/assets/sandwich.jpeg")
 sandwich.addItem()
 
 const sandwichString = JSON.stringify(sandwich)
