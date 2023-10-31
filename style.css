@@ -78,6 +78,10 @@ li.tab_link {
     flex-direction: row;
 }
 
+#login {
+    margin-top: 10px;
+}
+
 #username_banner {
     margin-right: 20px;
     font-size: .7rem;
