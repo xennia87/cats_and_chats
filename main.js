@@ -186,10 +186,7 @@ pie.addItem()
 let sandwich = new cardItem("Neko sandwich", "Sandwich de atun y sardinas", 8, "docs/assets/sandwich.jpeg")
 sandwich.addItem()
 
-let juice = new cardItem("Zumo de naranja", "Rico zumo recién exprimido", 5, "docs/assets/juice.jpeg")
-juice.addItem()
-
-let donut = new cardItem("Donut fresa", "Donut relleno de nata", 4, "docs/assets/donut.jpeg")
+let donut = new cardItem("Kitty donut", "Donut relleno de nata", 4, "docs/assets/donut.jpeg")
 donut.addItem()
 
 const sandwichString = JSON.stringify(sandwich)
@@ -235,42 +232,7 @@ function addToCart(name, price, quantity = 1) {
 // Acción para escuchar el botón de "Añadir al carrito"
 
 const addButton = document.querySelectorAll('.card_submit')
-// const cartItems = document.querySelectorAll('.cart_product_item')
 
-// addButton.forEach(boton => {
-//     boton.addEventListener('click', function() {
-//         const card = boton.closest('.card')
-//         const itemName = card.querySelector('.card_title').textContent
-//         const itemPrice = card.querySelector('.card_price').textContent
-
-//         const cartItems = document.querySelectorAll('.cart_product_item')
-
-//         const existingCartItem = [...cartItems].find(item => {
-//             const cartItemName = item.querySelector('.cart_product_name').textContent
-//             return (cartItemName == itemName) ? true : false
-//         })
-
-//         // Si existe el elemento en el carrito añadimos +1 a la cantidad e incrementamos el precio
-//         if (existingCartItem) {
-//             const itemQuantity = existingCartItem.querySelector('.cart_product_quantity')
-//             const currentQuantity = parseInt(itemQuantity.textContent, 10)
-//             itemQuantity.textContent = currentQuantity +1
-
-//             const itemTotalPrice = existingCartItem.querySelector('.cart_product_price')
-//             const currenTotalPrice = parseFloat(itemTotalPrice.textContent.replace(',', ''))
-//             const newTotalPrice = (currentQuantity + 1) * itemPrice
-//             itemTotalPrice.textContent = newTotalPrice.toFixed(2)
-
-//         } else {
-//             addToCart(itemName, itemPrice)
-//         }
-//         // Recalculamos el total
-//         const total = calculateTotal()
-//         cartTotal.textContent = total.toFixed(2)
-//     })
-// })
-
-// Acción para escuchar el botón de "Añadir al carrito"
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('card_submit')) {
         const boton = event.target;
@@ -305,7 +267,6 @@ document.addEventListener('click', function(event) {
 
     }
 });
-
 
 // Eliminar del carrito
 
