@@ -5,10 +5,13 @@ function showWelcomeMessage(username) {
     const headerMessageContainer = document.getElementById('headerMessageContainer')
     const headerMessage = document.getElementById('headerMessage')
     const closeMessage = document.getElementById('closeMessage')
+    const userNameBanner = document.getElementById('username_banner')
+
     headerMessageContainer.style.display = 'flex'
     headerMessage.innerText = (username == 'admin') ? `Bienvenido ${username}.
     Puedes crear artículos desde el enlace superior` : `Bienvenido ${username}`
-    
+    userNameBanner.innerHTML = `Hola ${username}`
+
     // Cierra el mensaje de bienvenida cuando se hace clic en el botón de cierre
     closeMessage.addEventListener('click', () => {
         headerMessageContainer.style.display = 'none'

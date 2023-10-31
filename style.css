@@ -74,6 +74,13 @@ li.tab_link {
     position: absolute;
     top: 40px;
     right: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+#username_banner {
+    margin-right: 20px;
+    font-size: .7rem;
 }
 
 .login_btn {
@@ -143,6 +150,7 @@ li.tab_link {
     padding: 10px;
     width: 30%;
     margin-left: 35%;
+    margin-top: 10px;
 }
 
 #headerMessage {
@@ -153,6 +161,8 @@ li.tab_link {
 
 #closeMessage {
     display: block;
+    align-self: flex-start;
+    color: var(--darkest-brown);
 }
 
 .close {
@@ -282,7 +292,7 @@ small {
     font-size: 0.7em;
 }
 
-.cart_product_total_sum {
+.cart_product_total_sum {x
     font-size: 1.5rem;
 }
 
