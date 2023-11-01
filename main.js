@@ -26,25 +26,25 @@ const users = '[ { "username": "admin", "password": "admin" }, { "username": "en
 const usersObj = JSON.parse(users)
 
 // Obtenemos los elementos del DOM
-const loginButton = document.getElementById("loginButton")
-const modal = document.getElementById("modalweb")
-const close = document.getElementById("close")
+const loginButton = document.getElementById('loginButton')
+const modal = document.getElementById('modalweb')
+const close = document.getElementById('close')
 
-// Mostramos el modal cuando se hace clic en el botón "Login"
-loginButton.addEventListener("click", () => {
-    modal.style.display = "block"
+// Mostramos el modal cuando se hace clic en el botón 'Login'
+loginButton.addEventListener('click', () => {
+    modal.style.display = 'block'
 
 })
 
-// Ocultamos el modal cuando se hace clic en la "X" de cerrar
-close.addEventListener("click", () => {
-    modal.style.display = "none"
+// Ocultamos el modal cuando se hace clic en la 'X' de cerrar
+close.addEventListener('click', () => {
+    modal.style.display = 'none'
 })
 
 // Ocultamos el modal cuando se hace clic fuera de él
-window.addEventListener("click", (event) => {
+window.addEventListener('click', (event) => {
     if (event.target == modal) {
-        modal.style.display = "none"
+        modal.style.display = 'none'
     }
 })
 
@@ -56,7 +56,7 @@ function verifyCredentials(username, password) {
     if (userFound) {
         showWelcomeMessage(userFound.username) // Muestra el mensaje de bienvenida
         createArticleTab.style.display = 'block'
-        modal.style.display = "none" // Cierra el modal
+        modal.style.display = 'none' // Cierra el modal
     } else {
         // Usuario no encontrado, muestra un mensaje de error en el modal
         document.getElementById('errorMessage').textContent = 'Usuario no encontrado'
@@ -65,9 +65,9 @@ function verifyCredentials(username, password) {
 }
 
 // Manejar el evento de inicio de sesión
-document.getElementById('login').addEventListener("click", () => {
-    const username = document.getElementById("username").value
-    const password = document.getElementById("password").value
+document.getElementById('login').addEventListener('click', () => {
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
     
     verifyCredentials(username, password)
 })
@@ -76,41 +76,41 @@ document.getElementById('login').addEventListener("click", () => {
 
 const addProduct = document.getElementById('create_article')
 const productFormModal = document.getElementById('modal_new_product')
-const closeForm = document.getElementById("closeForm")
+const closeForm = document.getElementById('closeForm')
 const createProduct = document.getElementById('create_product_button')
 
 
-// Mostramos el modal cuando se hace clic en el botón "Crear producto"
-addProduct.addEventListener("click", () => {
-    productFormModal.style.display = "block"
+// Mostramos el modal cuando se hace clic en el botón 'Crear producto'
+addProduct.addEventListener('click', () => {
+    productFormModal.style.display = 'block'
     addProduct.setAttribute('aria-selected', true)
     
 })
 
-// Ocultamos el modal cuando se hace clic en la "X" de cerrar
-closeForm.addEventListener("click", () => {
-    productFormModal.style.display = "none"
+// Ocultamos el modal cuando se hace clic en la 'X' de cerrar
+closeForm.addEventListener('click', () => {
+    productFormModal.style.display = 'none'
     addProduct.setAttribute('aria-selected', false)
 })
 
 // Ocultamos el modal cuando se hace clic fuera de él
-window.addEventListener("click", (event) => {
+window.addEventListener('click', (event) => {
     if (event.target == productFormModal) {
-        productFormModal.style.display = "none"
+        productFormModal.style.display = 'none'
         addProduct.setAttribute('aria-selected', false)
     }
 })
 
 // Ocultamos el modal cuando se envía el form
-createProduct.addEventListener("click", (event) => {
-    productFormModal.style.display = "none"
+createProduct.addEventListener('click', (event) => {
+    productFormModal.style.display = 'none'
     addProduct.setAttribute('aria-selected', false)
 })
 
 // Agregamos un producto cuando se pulsa el botón enviar
 
 document.getElementById('create_product_button').addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     const name = document.getElementById('name').value
     const description = document.getElementById('description').value
@@ -180,13 +180,13 @@ class cardItem {
 
 // Agregamos nuevos items
 
-let pie = new cardItem("Pastel Catu", "Pastel de chocolate", 7.50, "docs/assets/cake.jpeg")
+let pie = new cardItem('Pastel Catu', 'Pastel de chocolate', 7.50, 'docs/assets/cake.jpeg')
 pie.addItem()
 
-let sandwich = new cardItem("Neko sandwich", "Sandwich de atun y sardinas", 8, "docs/assets/sandwich.jpeg")
+let sandwich = new cardItem('Neko sandwich', 'Sandwich de atun y sardinas', 8, 'docs/assets/sandwich.jpeg')
 sandwich.addItem()
 
-let donut = new cardItem("Kitty donut", "Donut relleno de nata", 4, "docs/assets/donut.jpeg")
+let donut = new cardItem('Kitty donut', 'Donut relleno de nata', 4, 'docs/assets/donut.jpeg')
 donut.addItem()
 
 const sandwichString = JSON.stringify(sandwich)
@@ -229,22 +229,22 @@ function addToCart(name, price, quantity = 1) {
 
 }
 
-// Acción para escuchar el botón de "Añadir al carrito"
+// Acción para escuchar el botón de 'Añadir al carrito'
 
 const addButton = document.querySelectorAll('.card_submit')
 
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('card_submit')) {
-        const boton = event.target;
-        const card = boton.closest('.card');
-        const itemName = card.querySelector('.card_title').textContent;
-        const itemPrice = card.querySelector('.card_price').textContent;
+        const boton = event.target
+        const card = boton.closest('.card')
+        const itemName = card.querySelector('.card_title').textContent
+        const itemPrice = card.querySelector('.card_price').textContent
 
-        const cartItems = document.querySelectorAll('.cart_product_item');
+        const cartItems = document.querySelectorAll('.cart_product_item')
 
         const existingCartItem = [...cartItems].find(item => {
-            const cartItemName = item.querySelector('.cart_product_name').textContent;
-            return (cartItemName == itemName) ? true : false;
+            const cartItemName = item.querySelector('.cart_product_name').textContent
+            return (cartItemName == itemName) ? true : false
         })
 
         // Si existe el elemento en el carrito añadimos +1 a la cantidad e incrementamos el precio
@@ -266,7 +266,7 @@ document.addEventListener('click', function(event) {
         cartTotal.textContent = total.toFixed(2)
 
     }
-});
+})
 
 // Eliminar del carrito
 
@@ -306,50 +306,50 @@ cartTotal.textContent = total.toFixed(2)
 
 // Creamos una cadena de elementos en el carrito
 function getCartItemsString() {
-    const cartItems = document.querySelectorAll('.cart_product_item');
-    const itemsArray = [];
+    const cartItems = document.querySelectorAll('.cart_product_item')
+    const itemsArray = []
 
     cartItems.forEach(item => {
-        const name = item.querySelector('.cart_product_name').textContent;
-        const quantity = item.querySelector('.cart_product_quantity').textContent;
-        const price = item.querySelector('.cart_product_price').textContent;
+        const name = item.querySelector('.cart_product_name').textContent
+        const quantity = item.querySelector('.cart_product_quantity').textContent
+        const price = item.querySelector('.cart_product_price').textContent
         const itemObject = {
             name: name,
             quantity: quantity,
             price: price
-        };
-        itemsArray.push(itemObject);
-    });
+        }
+        itemsArray.push(itemObject)
+    })
 
-    const cartItemsString = JSON.stringify(itemsArray);
-    return cartItemsString;
+    const cartItemsString = JSON.stringify(itemsArray)
+    return cartItemsString
 }
   
 // Función para agregar la cadena al local storage
 function saveCartToLocalStorage() {
-    const cartItemsString = getCartItemsString();
-    localStorage.setItem('cartItems', cartItemsString);
+    const cartItemsString = getCartItemsString()
+    localStorage.setItem('cartItems', cartItemsString)
   }
   
 // Llamamos a la función de guardar el carrito cuando se cierra / recarga la página.
   window.addEventListener('beforeunload', function() {
-    saveCartToLocalStorage();
-  });
+    saveCartToLocalStorage()
+  })
 
   function loadCartFromLocalStorage() {
-    const cartItemsString = localStorage.getItem('cartItems');
-    console.log(cartItemsString);
+    const cartItemsString = localStorage.getItem('cartItems')
+    console.log(cartItemsString)
     if (cartItemsString) {
-        const itemsArray = JSON.parse(cartItemsString);
+        const itemsArray = JSON.parse(cartItemsString)
 
         itemsArray.forEach(itemObject => {
-            const itemName = itemObject.name;
-            const itemQuantity = itemObject.quantity;
-            const itemPrice = itemObject.price;
+            const itemName = itemObject.name
+            const itemQuantity = itemObject.quantity
+            const itemPrice = itemObject.price
 
-            addToCart(itemName, itemPrice, parseInt(itemQuantity, 10));
-        });
+            addToCart(itemName, itemPrice, parseInt(itemQuantity, 10))
+        })
     }
 }
 // Llamamos a la función de cargar el carrito una vez por carga.
-loadCartFromLocalStorage();
+loadCartFromLocalStorage()
