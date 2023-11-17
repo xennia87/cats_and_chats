@@ -444,3 +444,8 @@ button:hover {
     cursor: pointer;
     font-size: 40px;
 }
+
+/* Estilos para el popup de inicio */
+.alert_popup {
+    font-size: 14px;
+}

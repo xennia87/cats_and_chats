@@ -1,3 +1,23 @@
+/// Alerta bienvenida con instrucciones de la web
+
+function showWelcomeAlert() {
+  Swal.fire({
+    title: 'Bienvenido profe / tutor',
+    html: `
+    <h3>Info importante</h3>
+      <ul>
+        <li class="alert_popup">Sistema de login: Cuando se hace click en el botón de login, se abre un modal para introducir usuario y contraseña. Por favor escribe "admin" en ambos input. <br> Cuando el usuario es un admin, se muestra una nueva pestaña en el header 'Crear artículo'. <br>Sea el usuario un usuario final (escribe enduser en ambos campos para probar este comportamiento) o un admin, se añade un pequeño banner de bienvenida en la web. <br>Si el usuario pulsa en la 'X' de ese mensaje, este se cierra y desaparece.</li>
+        <br>
+        <li class="alert_popup">Alta de artículos: Logueado como admin, cuando se hace click en la pestaña de 'Crear artículo' se abre un form. Puedes usar los valores que están prerellenos allí para crear un nuevo artículo.</li>
+      </ul>`,
+    icon: 'question',
+    confirmButtonText: 'Entendido'
+  });
+}
+
+
+document.addEventListener('DOMContentLoaded', showWelcomeAlert);
+
 /// MENSAJE BIENVENIDA
 
 // Función para mostrar el mensaje de bienvenida
@@ -22,12 +42,21 @@ function showWelcomeMessage(username) {
   }
   /// SISTEMA LOGIN
   
-  // Convertimos el json de usuarios a un array y a objeto
+  // Cargamos los usuarios desde el JSON mediante fetch
   
-  const users =
-    '[ { "username": "admin", "password": "admin" }, { "username": "enduser", "password": "enduser" } ]';
-  
-  const usersObj = JSON.parse(users);
+  function loadUsers() {
+    return fetch('usuarios.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error cargando usuarios:', error);
+        throw error;
+      });
+  }
   
   // Obtenemos los elementos del DOM
   const loginButton = document.getElementById("loginButton");
@@ -50,27 +79,37 @@ function showWelcomeMessage(username) {
       modal.style.display = "none";
     }
   });
-  
-  // Función para verificar las credenciales
+      
+  // Función para verificar las credenciales y mostrar mensaje de bienvenida.
   function verifyCredentials(username, password) {
-    const userFound = usersObj.find(
-      (user) => user.username === username && user.password === password,
-    );
-    const createArticleTab = document.getElementById("create_article");
-  
-    if (userFound) {
-      showWelcomeMessage(userFound.username); // Muestra el mensaje de bienvenida
-      createArticleTab.style.display = "block";
-      modal.style.display = "none"; // Cierra el modal
-    } else {
-      // Usuario no encontrado, muestra un mensaje de error en el modal
-      document.getElementById("errorMessage").textContent =
-        "Usuario no encontrado";
-      document.getElementById("errorMessage").style.color = "red";
-    }
+    return new Promise((resolve, reject) => {
+      loadUsers()
+      .then(users => {
+        const userFound = users.find(
+          (user) => user.username === username && user.password === password
+          );
+          if (userFound) {
+            showWelcomeMessage(userFound.username); 
+            const createArticleTab = document.getElementById("create_article");
+            createArticleTab.style.display = "block";
+            const modal = document.getElementById("modalweb");
+            modal.style.display = "none";
+            resolve(userFound);
+          } else {
+            // Usuario no encontrado, muestra un mensaje de error en el modal
+            document.getElementById("errorMessage").textContent =
+              "Usuario no encontrado";
+            document.getElementById("errorMessage").style.color = "red";
+            reject(new Error("Usuario no encontrado"));
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
   
-  // Manejar el evento de inicio de sesión
+  // Manejo del evento de inicio de sesión
   document.getElementById("login").addEventListener("click", () => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
@@ -183,35 +222,28 @@ function showWelcomeMessage(username) {
       };
     }
   }
-  
-  // Agregamos nuevos items
-  
-  let pie = new cardItem(
-    "Pastel Catu",
-    "Pastel de chocolate",
-    7.5,
-    "docs/assets/cake.jpeg"
-  );
-  pie.addItem();
-  
-  let sandwich = new cardItem(
-    "Neko sandwich",
-    "Sandwich de atun y sardinas",
-    8,
-    "docs/assets/sandwich.jpeg",
-  );
-  sandwich.addItem();
-  
-  let donut = new cardItem(
-    "Kitty donut",
-    "Donut relleno de nata",
-    4,
-    "docs/assets/donut.jpeg",
-  );
-  donut.addItem();
-  
-  const sandwichString = JSON.stringify(sandwich);
-  
+
+  // Carga de los productos via el JSON
+  function loadProductsFromJson() {
+    fetch('catalogo.json') 
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(product => {
+          const newProduct = new cardItem(
+            product.nombre_producto,
+            product.descripcion_producto,
+            product.precio_producto,
+            product.imagen_producto
+          );
+          newProduct.addItem();
+        });
+      })
+      .catch(error => console.error('Error al cargar los productos:', error));
+  }
+
+  // Llamada a la función para cargar los productos
+  document.addEventListener('DOMContentLoaded', loadProductsFromJson);
+
   /// CARRITO
   // Agrega los productos fisicamente al contenedor del carrito
   
