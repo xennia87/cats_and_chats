@@ -30,3 +30,4 @@ Por favor escribe `admin` en ambos valores.
 
 - Cuando el usuario quiere cerrar la página, se guarda el contenido del carrito en el local storage.
 - Cuando el usuario vuelve a abrir la página, el carrito vuelve a generarse.
+- También se guarda el login.
