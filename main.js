@@ -163,13 +163,28 @@ function verifyCredentials(username, password) {
   });
 }
 
-// Manejo del evento de inicio de sesión
-document.getElementById("login").addEventListener("click", () => {
+// Manejo del evento de inicio de sesión al hacer click
+document.getElementById("login").addEventListener("click", loginHandler);
+
+// Función que maneja el inicio de sesión
+function loginHandler() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
   verifyCredentials(username, password);
+}
+
+// Función para que se pueda enviar también con la tecla Intro
+const inputs = document.querySelectorAll("#modalweb input");
+inputs.forEach(input => {
+  input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      loginHandler();
+    }
+  });
 });
+
 
 // SISTEMA NUEVO PRODUCTO
 
